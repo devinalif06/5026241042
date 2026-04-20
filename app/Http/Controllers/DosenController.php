@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class DosenController extends Controller
+{
+    //
+    public function index()
+    {
+        return "Ini adalah halaman dosen";
+    }
+    public function biodata(){
+        $nama = "Devin Alif";
+        $umur = 20;
+        $pelajaran = ["Algoritma & Pemrograman","Kalkulus","Pemrograman Web"];
+    	return view('biodata',['nama' => $nama, 'umur' => $umur, 'matkul' => $pelajaran]);
+    }
+}
