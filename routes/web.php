@@ -19,5 +19,28 @@ Route::get('part5', function () {
     return view('pertemuan5');
 });
 
+Route::get('tugasweek4', function () {
+    return view('tugasweek4');
+});
+
+Route::get('tugasweek3', function () {
+    return view('tugasweek3p1');
+});
+
+Route::get('/page2', function () {
+    return view('tugasweek3p2');
+});
+
+Route::get('/page3', function () {
+    return view('tugasweek3p3');
+});
+
+Route::get('index', function () {
+    return view('index');
+});
+
+Route::get('tugasweek5', function () {
+    return view('tugasweek5');
+});
 Route::get('dosen', [DosenController::class, 'index']);
 Route::get('biodata', [DosenController::class, 'biodata']);
