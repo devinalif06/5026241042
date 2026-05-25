@@ -86,7 +86,7 @@ class PegawaiDBController extends Controller
 		->paginate();
 
     		// mengirim data pegawai ke view index
-		return view('index',['pegawai' => $pegawai]);
+		return view('index2',['pegawai' => $pegawai]);
 
 	}
 }
