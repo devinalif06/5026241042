@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+use function Symfony\Component\Console\get;
+
 class PegawaiDBController extends Controller
 {
     public function index()
@@ -83,7 +85,9 @@ class PegawaiDBController extends Controller
     		// mengambil data dari table pegawai sesuai pencarian data
 		$pegawai = DB::table('pegawai')
 		->where('pegawai_nama','like',"%".$cari."%")
-		->paginate();
+		->paginate(10)
+		->appends($request->all());
+
 
     		// mengirim data pegawai ke view index
 		return view('index2',['pegawai' => $pegawai]);
