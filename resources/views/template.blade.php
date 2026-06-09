@@ -21,7 +21,7 @@
             <a class="nav-link active" href="/pegawai">Pegawai</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Kaos</a>
+            <a class="nav-link" href="/kaos">Kaos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="/siswa">Siswa</a>

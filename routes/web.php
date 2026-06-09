@@ -8,6 +8,7 @@ use App\Http\Controllers\PegawaiDBController;
 use App\Http\Controllers\SiswaController;
 use App\Http\Controllers\KeranjangBelanjaController;
 use App\Http\Controllers\NilaikuliahController;
+use App\Http\Controllers\KaosDBController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -93,3 +94,11 @@ Route::delete('/keranjang/{id}', [KeranjangBelanjaController::class, 'batal'])->
 Route::get('/nilaikuliah', [NilaikuliahController::class, 'index'])->name('nilaikuliah.index');
 Route::get('/nilaikuliah/tambah', [NilaikuliahController::class, 'tambah'])->name('nilaikuliah.tambah');
 Route::post('/nilaikuliah/store', [NilaikuliahController::class, 'store'])->name('nilaikuliah.store');
+
+Route::get('/kaos', [KaosDBController::class, 'indexKaos']);
+Route::get('/kaos/tambah', [KaosDBController::class, 'tambah_kaos']);
+Route::post('/kaos/store', [KaosDBController::class, 'store_kaos']);
+Route::get('/kaos/edit/{id}', [KaosDBController::class, 'edit_kaos']);
+Route::post('/kaos/update', [KaosDBController::class, 'update_kaos']);
+Route::get('/kaos/hapus/{id}', [KaosDBController::class, 'hapus_kaos']);
+Route::get('/kaos/cari', [KaosDBController::class, 'cari_kaos']);
