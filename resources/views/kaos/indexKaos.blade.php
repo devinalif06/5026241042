@@ -2,60 +2,38 @@
 @section('title', 'Data Kaos')
 @section('konten')
 
-    <h2>Data Kaos</h2>
-
-    @if (session('success'))
-        <p style="color: green;">{{ session('success') }}</p>
-    @endif
-
-    <form action="/kaos/cari" method="GET" style="margin-bottom: 15px;">
-        <input type="text" name="cari" placeholder="Cari merk kaos..." value="{{ request()->get('cari') }}" style="padding: 5px; width: 250px;">
-        <button type="submit" class="btn btn-secondary">Cari</button>
-    </form>
-
     <a href="/kaos/tambah" class="btn btn-primary">Tambah Kaos Baru</a>
-
-    <br><br>
-
-    <table class="table table-striped table-hover">
+    <br />
+    <br />
+    <p>Cari Data Kaos :</p>
+    <form action="/kaos/cari" method="GET" class="from-inline">
+        <div class="form-group">
+            <input type="text" name="cari" placeholder="Cari Kaos .." class="form-control">
+            <input type="submit" value="CARI">
+        </div>
+    </form>
+    <br />
+    <table class="table table-striped table-hover ">
         <tr>
             <th>Kode Kaos</th>
             <th>Merk Kaos</th>
-            <th>Stok Kaos</th>
+            <th>Stock</th>
             <th>Tersedia</th>
-            <th>Aksi</th>
+            <th>Opsi</th>
         </tr>
-
-        @forelse($kaos as $row)
+        @foreach ($kaos as $k)
             <tr>
-                <td>{{ $row->kodekaos }}</td>
-                <td>{{ $row->merkkaos }}</td>
-                <td>{{ $row->stockkaos }}</td>
+               <td>{{ $k->kodekaos }}</td>
+                <td>{{ $k->merkkaos }}</td>
+                <td>{{ $k->stockkaos }}</td>
+                <td>{{ $k->tersedia }}</td>
                 <td>
-                    @if($row->tersedia == 'Y')
-                        <span class="badge bg-success">Tersedia (Y)</span>
-                    @else
-                        <span class="badge bg-danger">Habis (N)</span>
-                    @endif
-                </td>
-                <td>
-                    <a href="/kaos/edit/{{ $row->kodekaos }}" class="btn btn-warning">Edit</a>
+                    <a href="/kaos/edit/{{ $k->kodekaos }}"class="btn btn-warning">Edit</a>
 
-                    <form action="/kaos/hapus/{{ $row->kodekaos }}" method="GET" style="display:inline;"
-                          onsubmit="return confirm('Yakin ingin menghapus data ini?')">
-                        @csrf
-                        <button type="submit" class="btn btn-danger">Hapus</button>
-                    </form>
+                    <a href="/kaos/hapus/{{ $k->kodekaos }}" class="btn btn-danger">Hapus</a>
                 </td>
             </tr>
-        @empty
-            <tr>
-                <td colspan="5">Belum ada data kaos.</td>
-            </tr>
-        @endforelse
+        @endforeach
     </table>
-
-    <div class="d-flex justify-content-center mt-3">
-        {{ $kaos->links() }}
-    </div>
+    {{ $kaos->links() }}
 @endsection

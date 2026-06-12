@@ -2,72 +2,52 @@
 @section('title', 'Edit Data Kaos')
 @section('konten')
 
-    <h2>Edit Kaos</h2>
-
-    @if ($errors->any())
-        <ul style="color: red;">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+    <a href="/kaos" class="btn btn-secondary mb-4">Kembali</a>
 
     @foreach($kaos as $k)
-    <form action="/kaos/update" method="POST" onsubmit="return validasiForm()">
-        @csrf
-        <input type="hidden" name="id" value="{{ $k->kodekaos }}">
+    <div class="card">
+            <div class="card-header">
+                Form Edit Data Kaos
+            </div>
 
-        <p>
-            <label>Kode Kaos (Auto Number)</label><br>
-            <input type="text" value="{{ $k->kodekaos }}" disabled style="background-color: #eee;">
-        </p>
+            <div class="card-body">
+                <form action="/kaos/update" method="post">
+                    {{ csrf_field() }}
 
-        <p>
-            <label>Merk Kaos</label><br>
-            <input type="text" name="merkkaos" id="merkkaos" maxlength="30" value="{{ old('merkkaos', $k->merkkaos) }}">
-        </p>
+                    <input type="hidden" name="id" value="{{ $k->kodekaos }}">
 
-        <p>
-            <label>Stok Kaos</label><br>
-            <input type="number" name="stockkaos" id="stockkaos" value="{{ old('stockkaos', $k->stockkaos) }}">
-        </p>
+                    <div class="row mb-3">
+                        <label for="nama" class="col-sm-2 col-form-label">Merk Kaos</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="merkkaos" id="merkkaos" class="form-control" required
+                                value="{{ $k->merkkaos }}">
+                        </div>
+                    </div>
 
-        <p>
-            <label>Status Ketersediaan</label><br>
-            <select name="tersedia" id="tersedia" style="width: 180px; padding: 3px;">
-                <option value="Y" {{ old('tersedia', $k->tersedia) == 'Y' ? 'selected' : '' }}>Tersedia (Y)</option>
-                <option value="N" {{ old('tersedia', $k->tersedia) == 'N' ? 'selected' : '' }}>Habis (N)</option>
-            </select>
-        </p>
+                    <div class="row mb-3">
+                        <label for="jenis" class="col-sm-2 col-form-label">Stock Kaos</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="stockkaos" id="stockkaos" class="form-control" required
+                                value="{{ $k->stockkaos }}">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="tersedia" class="col-sm-2 col-form-label">Tersedia</label>
+                        <div class="col-sm-10">
+                            <select name="tersedia" id="tersedia" class="form-control" required>
+                                <option value="Y" {{ $k->tersedia == 'Y' ? 'selected' : '' }}>Y</option>
+                                <option value="N" {{ $k->tersedia == 'N' ? 'selected' : '' }}>N</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-sm-2 col-sm-10">
+                            <input type="submit" value="Simpan Data" class="btn btn-primary">
+                        </div>
+                    </div>
 
-        <button type="submit" class="btn btn-warning">Update</button>
-        <a href="/kaos" class="btn btn-secondary">Kembali</a>
-    </form>
+                </form>
+            </div>
+        </div>
     @endforeach
-
-    <script>
-        function validasiForm() {
-            let merk = document.getElementById('merkkaos').value.trim();
-            let stok = document.getElementById('stockkaos').value.trim();
-            let tersedia = document.getElementById('tersedia').value;
-
-            if (merk === '') {
-                Swal.fire({ title: "Kesalahan Input Data!", text: "Merk kaos wajib diisi", icon: "error" });
-                return false;
-            }
-            if (merk.length > 30) {
-                Swal.fire({ title: "Kesalahan Input Data!", text: "Merk kaos maksimal 30 karakter", icon: "error" });
-                return false;
-            }
-            if (stok === '') {
-                Swal.fire({ title: "Kesalahan Input Data!", text: "Stok kaos wajib diisi", icon: "error" });
-                return false;
-            }
-            if (tersedia === '') {
-                Swal.fire({ title: "Kesalahan Input Data!", text: "Status ketersediaan wajib diisi", icon: "error" });
-                return false;
-            }
-            return true;
-        }
-    </script>
 @endsection

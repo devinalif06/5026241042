@@ -30,7 +30,7 @@
                 <td>Rp {{ number_format($row->Harga, 0, ',', '.') }}</td>
                 <td>Rp {{ number_format($row->Jumlah * $row->Harga, 0, ',', '.') }}</td>
                 <td>
-                    <a href="{{ route('keranjang.edit', $row->ID) }}" class="btn btn-success">Beli</a>
+                    <a href="{{ route('keranjang.beli', $row->ID) }}" class="btn btn-success">Beli</a>
 
                     <form action="{{ route('keranjang.batal', $row->ID) }}" method="POST" style="display:inline;"
                         onsubmit="return confirm('Yakin ingin membatalkan pesanan ini?')">
